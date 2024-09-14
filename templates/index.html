@@ -11,11 +11,19 @@
 
 <body>
     <h1>Pookie Soundboard</h1>
-    <form class="board">
-        <button>
+    <div class="board">
+        <button onclick="playSound()">
             Push
         </button>
-    </form>
+    </div>
 </body>
+
+<script>
+    function playSound() {
+        let url = "{{ url_for('static', filename='audio/carAlarm.mp3') }}";
+        let audio = new Audio(url);
+        audio.play();
+    }
+</script>
 
 </html>
