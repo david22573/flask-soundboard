@@ -19,9 +19,11 @@
 </body>
 
 <script>
+    const audio = new Audio();
     function playSound() {
-        let url = "{{ url_for('static', filename='audio/truck.mp3') }}";
-        let audio = new Audio(url);
+        let url = "{{ url_for('static', filename='audio/rooster.mp3') }}";
+        audio.src = url;
+        audio.load();
         audio.play();
     }
 </script>
