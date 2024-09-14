@@ -11,11 +11,11 @@ fi
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
 	# Windows (Git Bash or Cygwin)
     	source .venv/Scripts/activate
-    	uvicorn app:app --host 0.0.0.0 --reload
+    	waitress-serve --port 8081 app:app
 else
 	# Unix (Linux or macOS)
     	source .venv/bin/activate
-    	nohup uvicorn app:app --host 0.0.0.0 > /dev/null 2>&1 &
+    	nohup waitress-serve --port 8081 app:app > /dev/null 2>&1 &
 fi
 
 # Deactivate the virtual environment
