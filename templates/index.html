@@ -10,23 +10,34 @@
 </head>
 
 <body>
-    <h1>Pookie Soundboard</h1>
-    <div class="board">
-        {% for file in audio_files %}
-        <div class="tile">
-            <div class="tile-title">{{ file.split('.')[0] }}</div>
-            <button
-                onclick="playSound('{{ url_for('static', filename='audio/' + file) }}')">
-                Play
-            </button>
+    <div class="container">
+        <h1>Pookie Soundboard</h1>
+        <div class="soundboard">
+            <select id="audioSelect">
+                <option value="" disabled selected>Select a sound</option>
+                {% for file in audio_files %}
+                <option
+                    value="{{ url_for('static', filename='audio/' + file) }}">{{
+                    file.split('.')[0] }}</option>
+                {% endfor %}
+            </select>
+            <button onclick="playSelectedSound()">Play</button>
         </div>
-        {% endfor %}
+        <div id="nowPlaying" class="now-playing">
+            Now playing: <span id="currentTrack">None</span>
+        </div>
     </div>
     <script>
         const audio = new Audio();
-        function playSound(file) {
-            audio.src = file;
-            audio.play();
+        function playSelectedSound() {
+            const select = document.getElementById('audioSelect');
+            const selectedFile = select.value;
+            const selectedText = select.options[select.selectedIndex].text;
+            if (selectedFile) {
+                audio.src = selectedFile;
+                audio.play();
+                document.getElementById('currentTrack').textContent = selectedText;
+            }
         }
     </script>
 </body>
