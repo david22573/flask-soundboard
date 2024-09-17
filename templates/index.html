@@ -12,20 +12,23 @@
 <body>
     <h1>Pookie Soundboard</h1>
     <div class="board">
-        <button onclick="playSound()">
-            Push
-        </button>
+        {% for file in audio_files %}
+        <div class="tile">
+            <div class="tile-title">{{ file.split('.')[0] }}</div>
+            <button
+                onclick="playSound('{{ url_for('static', filename='audio/' + file) }}')">
+                Play
+            </button>
+        </div>
+        {% endfor %}
     </div>
+    <script>
+        const audio = new Audio();
+        function playSound(file) {
+            audio.src = file;
+            audio.play();
+        }
+    </script>
 </body>
-
-<script>
-    const audio = new Audio();
-    function playSound() {
-        let url = "{{ url_for('static', filename='audio/rooster.mp3') }}";
-        audio.src = url;
-        audio.load();
-        audio.play();
-    }
-</script>
 
 </html>
