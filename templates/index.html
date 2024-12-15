@@ -28,20 +28,22 @@
         </div>
     </div>
     <script>
-        const audio = new Audio();
         function playSelectedSound() {
+            const audio = new Audio();
+            const nowPlaying = document.getElementById('nowPlaying')
             const currentTrack = document.getElementById('currentTrack');
             const select = document.getElementById('audioSelect');
             const selectedFile = select.value;
             const selectedText = select.options[select.selectedIndex].text;
             if (selectedFile) {
-                currentTrack.classList.toggle('hidden');
+                nowPlaying.classList.toggle('hidden');
                 audio.src = selectedFile;
                 audio.play();
-                document.getElementById('currentTrack').textContent = selectedText;
+                currentTrack.textContent = selectedText;
 
                 audio.addEventListener('ended', () => {
-                    currentTrack.classList.toggle('hidden');
+                    currentTrack.textContent = selectedText;
+                    nowPlaying.classList.toggle('hidden');
                 })
             }
         }
