@@ -23,20 +23,26 @@
             </select>
             <button onclick="playSelectedSound()">Play</button>
         </div>
-        <div id="nowPlaying" class="now-playing">
+        <div id="nowPlaying" class="now-playing hidden">
             Now playing: <span id="currentTrack">None</span>
         </div>
     </div>
     <script>
         const audio = new Audio();
         function playSelectedSound() {
+            const currentTrack = document.getElementById('currentTrack');
             const select = document.getElementById('audioSelect');
             const selectedFile = select.value;
             const selectedText = select.options[select.selectedIndex].text;
             if (selectedFile) {
+                currentTrack.classList.toggle('hidden');
                 audio.src = selectedFile;
                 audio.play();
                 document.getElementById('currentTrack').textContent = selectedText;
+
+                audio.addEventListener('ended', () => {
+                    currentTrack.classList.toggle('hidden');
+                })
             }
         }
     </script>

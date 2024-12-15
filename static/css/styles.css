@@ -75,6 +75,10 @@ button:active {
     color: #03dac6;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 @media (min-width: 768px) {
     .soundboard {
         flex-direction: row;
